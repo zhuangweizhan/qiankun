@@ -1,0 +1,24 @@
+{
+  "name": "crm",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "path": "^0.12.7",
+    "sass": "^1.43.2",
+    "vue": "^3.2.16",
+    "vuex": "^4.0.0-0",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.0",
+    "@types/node": "^16.11.1",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "ant-design-vue": "^2.2.8",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.4-beta",
+    "vue-tsc": "^0.3.0"
+  }
+}
