@@ -1,56 +1,55 @@
 import { loadMicroApp, start } from 'qiankun';
-import actions  from '../globalStore'
+import { mapGetters } from 'vuex';
+import actions from '../globalStore';
 
 export default {
   data() {
     return {
-      erp: {},
+      crm: {},
       loadedApp: {},
       microApps: [
         {
-          name: 'erp',
+          name: 'crm',
           entry: 'http://localhost:8081',
-          container: '#erp_Container',
-          prefixPath: '/erp',
+          container: '#crm_Container',
+          activeRule: '/crm',
         },
         {
           name: 'sale',
           entry: 'http://localhost:8082',
           container: '#appChild2',
-          prefixPath: '/sale',
+          activeRule: '/sale',
         },
       ],
     };
   },
+  computed: {
+    ...mapGetters(['getToken']),
+  },
   methods: {
     isQianKun( routePath = this.$route.path ){
-      const microApp = this.microApps.find(item => routePath.includes(item.prefixPath));
+      const microApp = this.microApps.find(item => routePath.includes(item.activeRule));
       return microApp;
     },
     goQiankun( routePath = this.$route.path ) {
       const loadedApp = this.loadedApp;
-      const microApp = this.microApps.find(item => routePath.includes(item.prefixPath));
+      const microApp = this.microApps.find(item => routePath.includes(item.activeRule));
       // 如果是子应用
       if (microApp) {
         // 将主应用的路由转化为子路由URL
-        const childRoutePath = routePath.replace(microApp.prefixPath, '');
+        const childRoutePath = routePath.replace(microApp.activeRule, '');
         // 如果没有加载当前子应用
         if (!loadedApp[microApp.name]) {
           // 开始加载
-          // const loadingView = ElLoading.service();
           const app = loadMicroApp({
             ...microApp,
-            // container: `#container${microApp.name}`,
             props: {
+              token: this.getToken,
               getGlobalState: actions.getGlobalState // 下发getGlobalState方法
             }
           }); // 加载子应用
           // 开始完成
-          app.loadPromise.then(() => {
-            // nextTick(() => {
-            //   // loadingView.close();
-            // });
-          });
+          app.loadPromise.then(() => {});
           loadedApp[microApp.name] = {
             // 将当前子应用存入loadedApp缓存
             app,
@@ -63,7 +62,6 @@ export default {
             subRoutes.push(childRoutePath);
           }
         }
-        console.log(`loadedApp===`, loadedApp);
         // 通知子应用增加 keep-alive 的 include
         actions.setGlobalState(loadedApp);
       }

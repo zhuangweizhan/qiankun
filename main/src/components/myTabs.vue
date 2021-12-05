@@ -1,27 +1,51 @@
 <template>
-  <a-tabs v-model="getActiveTabs" type="editable-card" @change="onChange" @edit="onDel">
+<div>
+  <a-tabs v-model="tabActive" type="editable-card" @change="onChange" @edit="onDel">
     <a-tab-pane
-      v-for="(item, index) in getTabItems"
+      v-for="(item, index) in tabList"
       :key="index"
       :tab="item.name"
       :closable="true"
     >
     </a-tab-pane>
   </a-tabs>
+</div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import qiankun from "../views/qiankun.js";
 
 export default {
+  mixins: [qiankun],
+  data(){
+    return{
+      tabActive: Number(this.$store.getters.getActiveTabs )
+    }
+  },
   computed: {
-    ...mapGetters(["getTabItems", "getActiveTabs"]),
+    tabList(){
+      return this.$store.getters.getTabItems;
+    },
+    // tabActive(){
+    //   return this.$store.getters.getActiveTabs;
+    // }
+  },
+  watch:{
+    '$store.getters.getActiveTabs': function(val){
+       this.tabActive = val;
+    }
   },
   methods: {
     onDel(targetKey, action) {
-      this.$store.dispatch("clearTabs", targetKey); // 刷新待办消息
+      this.$store.dispatch("delTabs", targetKey);
     },
     onChange(targetKey, action) {
-      this.$store.commit("setActiveTabs", targetKey); // 刷新待办消息
+      this.tabActive = targetKey;
+      console.log(`this.tabList===`, this.tabList);
+      console.log(`this.tabList[targetKey].path===`, this.tabList[targetKey].path);
+      this.$router.push({ path: this.tabList[targetKey].path });
+      this.$store.commit("setActiveTabs", targetKey); 
+      this.isQianKun() && this.goQiankun(); // 走子项目路由
     },
   },
 };

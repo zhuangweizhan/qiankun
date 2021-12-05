@@ -1,13 +1,29 @@
-import { createStore } from 'vuex'
+import modules from "@/store/modules/index"
+import { App, InjectionKey } from "vue"
+import { createStore, Store, useStore as baseUseStore } from "vuex"
+import { IStore } from "./types"
 
-// 获取modules文件夹下所有ts文件
-const files: any = import.meta.globEager("./modules/*.ts")
-let modules: any = {}
-Object.keys(files).forEach((key) => {
-  // 将获取到结果按照 key:value 的形式存放到modules对象中
-  modules[key.replace(/(\.\/|\modules\/|\.ts)/g, '')] = files[key].default
+export const key: InjectionKey<Store<IStore>> = Symbol()
+
+const store = createStore<IStore>({
+  modules,
+  plugins: [
+    // createPersistedstate({
+    //   // 缓存数据时的key
+    //   key: "vuexxxxxxxx",
+    //   // 哪些模块需要被缓存
+    //   paths: ["qiankun"]
+    // })
+  ]
 })
-console.log('模块',modules)
-export default createStore({
-  modules
-})
+
+// 定义你自己的“useStore”组合函数
+export function useStore() {
+  return baseUseStore(key)
+}
+
+export function setupStore(app: App) {
+  app.use(store, key)
+}
+
+export default store

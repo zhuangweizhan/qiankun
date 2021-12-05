@@ -8,6 +8,7 @@
     }
     // 获取初始化的state
     const initState = props.getGlobalState && props.getGlobalState() || {
+      token: "",
       // messages: "子应用",
       // user: {}
     }

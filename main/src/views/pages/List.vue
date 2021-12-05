@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div>
-      <div>在主应用<b>列表页</b>，当前框架是<b>vue2</b></div>
-      <div>首次访问时间：{{ firstDate }}</div>
-      <div>重新访问时间：{{ newDate }}</div>
-    </div>
     <a-table :columns="columns" :data-source="data">
       <a slot="name" slot-scope="text">{{ text }}</a>
       <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
@@ -20,11 +15,7 @@
         </a-tag>
       </span>
       <span slot="action" slot-scope="text, record">
-        <a>Invite 一 {{ record.name }}</a>
-        <a-divider type="vertical" />
-        <a>Delete</a>
-        <a-divider type="vertical" />
-        <a class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
+        <a>操作</a>
       </span>
     </a-table>
   </div>
@@ -32,18 +23,20 @@
 <script>
 const columns = [
   {
+        title: "今日访客",
+
     dataIndex: "name",
     key: "name",
     slots: { title: "customTitle" },
     scopedSlots: { customRender: "name" },
   },
   {
-    title: "Age",
+    title: "访问次数",
     dataIndex: "age",
     key: "age",
   },
   {
-    title: "Address",
+    title: "ip地址",
     dataIndex: "address",
     key: "address",
   },
@@ -63,21 +56,21 @@ const columns = [
 const data = [
   {
     key: "1",
-    name: "John Brown",
+    name: "小明",
     age: 32,
     address: "New York No. 1 Lake Park",
     tags: ["nice", "developer"],
   },
   {
     key: "2",
-    name: "Jim Green",
+    name: "小黄",
     age: 42,
     address: "London No. 1 Lake Park",
     tags: ["loser"],
   },
   {
     key: "3",
-    name: "Joe Black",
+    name: "小李",
     age: 32,
     address: "Sidney No. 1 Lake Park",
     tags: ["cool", "teacher"],

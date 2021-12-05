@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    /* 模块解析选项 */
+    "moduleResolution": "node", // 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6)
+    "baseUrl": "./", // 用于解析非相对模块名称的基目录
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts", "types/**/*.ts", "build/**/*.ts", "build/**/*.d.ts", "mock/**/*.ts", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "**/*.js"]
+}

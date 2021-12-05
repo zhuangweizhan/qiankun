@@ -23,7 +23,6 @@ export default createStore({
   },
   actions: {
     reloadCashsTabs({commit}, data) {
-      console.log(`data===`, data);
       const cacheTabs = data.filter((item)=>{
         return item.type === 'sale'
       }).map( item =>{

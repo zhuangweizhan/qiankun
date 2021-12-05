@@ -1,6 +1,7 @@
 
 <template>
   <div id="app">
+    成功的456456456
     <router-view v-slot="{ Component }">
       <keep-alive :include="getCacheTabs">
         <component :is="Component"></component>

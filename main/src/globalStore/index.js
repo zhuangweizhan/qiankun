@@ -1,21 +1,32 @@
 import { initGlobalState } from 'qiankun';
 import Vue from 'vue';
+import utils from "../utils/utils";
 
 // 父应用的初始state
 // Vue.observable 让initialState变成可响应：https://cn.vuejs.org/v2/api/#Vue-observable。
 const initialState = Vue.observable({
-  message: '未设置',
-  tabs: [],
+  type: "",
+  routerMessage: "",
+  isLogin: false,
+  token: "",
+  tabList: []
 });
 
 const actions = initGlobalState(initialState);
 
-actions.onGlobalStateChange((newState, prev) => {
+actions.onGlobalStateChange((state, prev) => {
   // newState: 变更后的状态; prev 变更前的状态
-  console.log('主应用监听变化', newState, prev);
+  console.log('主应用监听变化', state, prev);
   //  console.log('主应用监听store变化', JSON.stringify(newState), JSON.stringify(prev))
+  const newState = JSON.parse( JSON.stringify(state));
+  console.log('newState', newState);
   for (const key in newState) {
     initialState[key] = newState[key]
+  }
+  if (newState.type === "redirectRoute") {
+    newState.type = "";
+    const { url, delTab, name } = newState.routerMessage;
+    utils.redirectPage(url, delTab, name);
   }
 });
 

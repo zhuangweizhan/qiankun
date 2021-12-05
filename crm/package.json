@@ -2,15 +2,18 @@
   "name": "crm",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "serve": "vite",
     "build": "vite build"
   },
   "dependencies": {
     "path": "^0.12.7",
     "sass": "^1.43.2",
+    "vite-plugin-style-import": "^1.4.0",
     "vue": "^3.2.16",
+    "vue-router": "^4.0.12",
     "vuex": "^4.0.0-0",
-    "vue-router": "^4.0.12"
+    "vite-plugin-qiankun": "1.0.10",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.0",

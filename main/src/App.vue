@@ -15,9 +15,12 @@ export default {
   name: "App",
   components: { layout },
   computed: {
-    invalidRoute() {
-      return !this.$route.matched || this.$route.matched.length === 0;
-    },
+    // invalidRoute() {
+    //   return !this.$route.matched || this.$route.matched.length === 0;
+    // },
   },
+  created(){
+    this.$store.commit("initTabItem", {})
+  }
 };
 </script>

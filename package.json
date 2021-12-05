@@ -1,0 +1,26 @@
+{
+    "name": "qiankun",
+    "version": "0.0.1",
+    "description": "来自稀土掘金，我叫逐步前行",
+    "main": "index.js",
+    "devDependencies": {
+      "npm-run-all": "^4.1.5"
+    },
+    "scripts": {
+      "install": "npm-run-all --serial install:*",
+      "install:main": "cd main && npm install",
+      "install:crm": "cd platform && npm install",
+      "install:sale": "cd platform && npm install",
+      "serve": "npm-run-all --parallel serve:*",
+      "serve:main": "cd main && npm run serve",
+      "serve:crm": "cd crm && npm run serve",
+      "serve:sale": "cd sale && npm run serve"
+    },
+    "keywords": [
+      "main",
+      "platform"
+    ],
+    "author": "逐步前行",
+    "license": "MIT",
+    "__npminstall_done": false
+  }
