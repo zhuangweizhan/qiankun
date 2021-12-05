@@ -10,7 +10,6 @@ export default {
     obj.isRouterName: 是否打开router的name模式, meta路由额外参数
   */
   redirectPage(url, delTab = false, name, obj = {}) {
-    console.log(`name=======`, name);
     const mainRoutes = vue.$router.options.routes[1].children;
     console.log(`mainRoutes`, mainRoutes);
     const path = url.indexOf("?") ? url.split("?")[0] : url; 
@@ -19,17 +18,13 @@ export default {
     })
     const isExistMain = nowIndex !== -1
     if( isExistMain ){ //主应用跳转
-      console.log(`主=============`, name);
       const meta = obj.meta ? obj.meta :  mainRoutes[nowIndex].meta;
       const routerName = name || meta.title;
       vue.$store.dispatch("setTabs", { path: url, name: routerName, delTab }).then(() => {
-        console.log(`11.=============`, path);
       })
       vue.$router.push({ path: url });
     } else { //子应用跳转
-      console.log(`子=============`, url);
       vue.$store.dispatch("setTabs", { path: url, name, delTab }).then(() => {
-        console.log(`22.=============`, path);
       })
       vue.$router.push({ path: url });
     }
