@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <a-config-provider :locale="locale" prefix-cls="pl-ant" v-if="token">
+    <a-config-provider :locale="locale" prefix-cls="ant2" v-if="token">
       <suspense>
         <router-view v-slot="{ Component }">
           <keep-alive :include="cacheTabs">

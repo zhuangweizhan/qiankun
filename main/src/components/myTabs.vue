@@ -26,9 +26,6 @@ export default {
     tabList(){
       return this.$store.getters.getTabItems;
     },
-    // tabActive(){
-    //   return this.$store.getters.getActiveTabs;
-    // }
   },
   watch:{
     '$store.getters.getActiveTabs': function(val){
@@ -41,8 +38,6 @@ export default {
     },
     onChange(targetKey, action) {
       this.tabActive = targetKey;
-      console.log(`this.tabList===`, this.tabList);
-      console.log(`this.tabList[targetKey].path===`, this.tabList[targetKey].path);
       this.$router.push({ path: this.tabList[targetKey].path });
       this.$store.commit("setActiveTabs", targetKey); 
       this.isQianKun() && this.goQiankun(); // 走子项目路由

@@ -27,5 +27,15 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "src")  //  __dirname 和 path 显示红色的波浪线需要安装插件npm i @types/node -S 
     }
-  }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: {
+          "ant-prefix": "ant2"
+        },
+        javascriptEnabled: true
+      }
+    }
+  },
 })
